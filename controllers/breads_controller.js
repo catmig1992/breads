@@ -43,12 +43,17 @@ breads.get("/:indexArray/edit", (req, res) => {
 //   }
 // });
 breads.get("/:id", (req, res) => {
-  Bread.findById(req.params.id).then((foundBread) => {
-    res.render("show", {
-      bread: foundBread,
+  Bread.findById(req.params.id)
+    .then((foundBread) => {
+      res.render("show", {
+        bread: foundBread,
+      });
+    })
+    .catch((err) => {
+      res.send("404");
     });
-  });
 });
+
 
 // CREATE
 // breads.post("/", (req, res) => {
