@@ -3,11 +3,6 @@ const breads = express.Router();
 const Bread = require("../models/bread.js");
 
 // INDEX
-// breads.get("/", (req, res) => {
-//   res.render("Index", {
-//     breads: Bread,
-//   });
-// });
 breads.get("/", (req, res) => {
   Bread.find().then((foundBreads) => {
     res.render("index", {
@@ -31,36 +26,30 @@ breads.get("/:id/edit", (req, res) => {
   });
 });
 
-// breads.get("/:indexArray/edit", (req, res) => {
-//   res.render("edit", {
-//     bread: Bread[req.params.indexArray],
-//     index: req.params.indexArray,
-//   });
+// SHOW
+// breads.get("/:id", (req, res) => {
+//   Bread.findById(req.params.id)
+//     .then((foundBread) => {
+//       res.render("show", {
+//         bread: foundBread,
+//       });
+//     })
+//     .catch((err) => {
+//       res.send("404");
+//     });
 // });
 
 // SHOW
-// breads.get("/:arrayIndex", (req, res) => {
-// res.send(Bread[req.params.arrayIndex])
-//   if (Bread[req.params.arrayIndex]) {
-//     res.render("Show", {
-//       bread: Bread[req.params.arrayIndex],
-//       index: req.params.arrayIndex,
-//     });
-//   } else {
-//     res.send("404");
-//   }
-// });
-breads.get("/:id", (req, res) => {
+breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
-    .then((foundBread) => {
-      res.render("show", {
-        bread: foundBread,
-      });
+      .then(foundBread => {
+        const bakedBy = foundBread.getBakedBy() 
+        console.log(bakedBy)
+        res.render('show', {
+            bread: foundBread
+        })
+      })
     })
-    .catch((err) => {
-      res.send("404");
-    });
-});
 
 // CREATE
 // breads.post("/", (req, res) => {
@@ -104,26 +93,11 @@ breads.put("/:id", (req, res) => {
   );
 });
 
-// breads.put("/:arrayIndex", (req, res) => {
-//   if (req.body.hasGluten === "on") {
-//     req.body.hasGluten = true;
-//   } else {
-//     req.body.hasGluten = false;
-//   }
-//   // Bread[req.params.arrayIndex] = req.body;
-//   res.redirect(`/breads/${req.params.arrayIndex}`);
-// });
-
 // DELETE
 breads.delete("/:id", (req, res) => {
   Bread.findByIdAndDelete(req.params.id).then((deletedBread) => {
     res.status(303).redirect("/breads");
   });
 });
-
-// breads.delete("/:indexArray", (req, res) => {
-//  // Bread.splice(req.params.indexArray, 1);
-//   res.status(303).redirect("/breads");
-// });
 
 module.exports = breads;
