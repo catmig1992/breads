@@ -16,10 +16,12 @@ const breadSchema = new Schema({
 
 // HELPER METHODS
 breadSchema.methods.getBakedBy = function () {
-  return `${this.name} was baked with love by ${
-    this.baker.name
-  }, who has been with us since ${this.baker.startDate.getFullYear()}`;
+  //   //   return `${this.name} was baked with love by ${
+  //   //     this.baker.name
+  //   //   }, who has been with us since ${this.baker.startDate.getFullYear()}`;
+  return `${this.name} was baked with love by ..., who has been with us since ...`;
 };
+// Need to fix bug
 
 // MODEL & EXPORT
 const Bread = mongoose.model("Bread", breadSchema);
