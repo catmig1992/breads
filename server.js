@@ -26,8 +26,8 @@ const breadsController = require("./controllers/breads_controller.js");
 app.use("/breads", breadsController);
 
 // BAKERS
-const bakersController = require('./controllers/bakers_controller.js')
-app.use('/bakers', bakersController)
+const bakersController = require("./controllers/bakers_controller.js");
+app.use("/bakers", bakersController);
 
 // 404 PAGE
 app.get("*", (req, res) => {
@@ -46,3 +46,5 @@ mongoose.connect(
     console.log("connected to mongo: ", process.env.MONGO_URI);
   }
 );
+
+module.exports = app;
