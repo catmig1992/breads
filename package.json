@@ -2,8 +2,7 @@
   "name": "breads",
   "version": "1.0.0",
   "engines": {
-    "node": "16.18.1",
-    "npm": "8.19.2"
+    "node": "16.15.0"
   },
   "description": "",
   "main": "server.js",
